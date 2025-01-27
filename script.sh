@@ -3,13 +3,26 @@
 # Demander le nom du projet
 read -p "🛠️  Nom du projet : " PROJECT_NAME
 
-# Vérifier si le projet existe déjà
-if [ -d "$PROJECT_NAME" ]; then
-    echo "⚠️  Le projet '$PROJECT_NAME' existe déjà."
-    read -p "Souhaitez-vous ajouter la structure des dossiers manquants ? (y/n) " ADD_STRUCTURE
-    read -p "Voulez-vous installer Tailwind et les bibliothèques recommandées ? (y/n) " ADD_LIBS
-else
-    # Choisir entre TypeScript et JavaScript
+# Choisir entre Yarn et NPM
+    echo "📌 Choisissez le gestionnaire de paquets :"
+    options=("Yarn" "NPM")
+    select opt in "${options[@]}"; do
+        case $opt in
+            "Yarn")
+                PKG_MANAGER="yarn"
+                PKG_MANAGER_CMD="yarn"
+                break
+                ;;
+            "NPM")
+                PKG_MANAGER="npm"
+                PKG_MANAGER_CMD="npm run"
+                break
+                ;;
+            *) echo "❌ Option invalide, choisissez 1 ou 2.";;
+        esac
+    done
+
+        # Choisir entre TypeScript et JavaScript
     echo "📌 Choisissez le type de projet React :"
     options=("TypeScript (react-ts)" "JavaScript (react)")
     select opt in "${options[@]}"; do
@@ -30,22 +43,12 @@ else
         esac
     done
 
-    # Choisir entre Yarn et NPM
-    echo "📌 Choisissez le gestionnaire de paquets :"
-    options=("Yarn" "NPM")
-    select opt in "${options[@]}"; do
-        case $opt in
-            "Yarn")
-                PKG_MANAGER="yarn"
-                break
-                ;;
-            "NPM")
-                PKG_MANAGER="npm"
-                break
-                ;;
-            *) echo "❌ Option invalide, choisissez 1 ou 2.";;
-        esac
-    done
+# Vérifier si le projet existe déjà
+if [ -d "$PROJECT_NAME" ]; then
+    echo "⚠️  Le projet '$PROJECT_NAME' existe déjà."
+    read -p "Souhaitez-vous ajouter la structure des dossiers manquants ? (y/n) " ADD_STRUCTURE
+    read -p "Voulez-vous installer Tailwind et les bibliothèques recommandées ? (y/n) " ADD_LIBS
+else
 
     # Créer le projet avec Vite
     echo "🚀 Création du projet avec Vite..."
@@ -76,45 +79,6 @@ fi
 
 # Installer Tailwind et les bibliothèques recommandées
 if [[ "$ADD_LIBS" == "y" ]]; then
-
-
-    # Choisir entre Yarn et NPM
-    echo "📌 Choisissez le gestionnaire de paquets :"
-    options=("Yarn" "NPM")
-    select opt in "${options[@]}"; do
-        case $opt in
-            "Yarn")
-                PKG_MANAGER="yarn"
-                break
-                ;;
-            "NPM")
-                PKG_MANAGER="npm"
-                break
-                ;;
-            *) echo "❌ Option invalide, choisissez 1 ou 2.";;
-        esac
-    done
-
-        # Choisir entre TypeScript et JavaScript
-    echo "📌 Choisissez le type de projet React :"
-    options=("TypeScript (react-ts)" "JavaScript (react)")
-    select opt in "${options[@]}"; do
-        case $opt in
-            "TypeScript (react-ts)")
-                TEMPLATE="react-ts"
-                FILE_EXT="tsx"
-                CONFIG_EXT="ts"
-                break
-                ;;
-            "JavaScript (react)")
-                TEMPLATE="react"
-                FILE_EXT="jsx"
-                CONFIG_EXT="js"
-                break
-                ;;
-            *) echo "❌ Option invalide, choisissez 1 ou 2.";;
-        esac
-    done
 
     echo "📦 Installation de Tailwind et des bibliothèques..."
     $PKG_MANAGER add react-router-dom react-icons @mui/material @mui/icons-material react-hot-toast tailwindcss @tailwindcss/vite
@@ -155,6 +119,6 @@ echo ""
 echo ""
 echo "✅ Projet '$PROJECT_NAME' prêt à l'emploi !"
 echo ""
-echo "🚀 Démarrez avec : cd $PROJECT_NAME && $PKG_MANAGER dev"
+echo "🚀 Démarrez avec : cd $PROJECT_NAME && $PKG_MANAGER_CMD dev"
 echo ""
 echo ""
