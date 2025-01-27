@@ -7,7 +7,7 @@ Un script Bash automatisé pour créer et configurer rapidement des projets Reac
 
 Exécutez cette commande dans votre terminal :
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/hard-tech/creat-vite-app/main/script.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/hard-tech/create-vite-app/main/script.sh)
 ```
 
 ## Installation Alternative
