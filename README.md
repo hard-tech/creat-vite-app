@@ -3,22 +3,14 @@
 ## Description
 Un script Bash automatisé pour créer et configurer rapidement des projets React avec Vite. Le script met en place une structure de projet complète avec Tailwind CSS et des bibliothèques essentielles.
 
-## Fonctionnalités
+## Installation Rapide
 
-- Création de projet React avec Vite
-- Support TypeScript et JavaScript
-- Configuration automatique de Tailwind CSS
-- Structure de dossiers organisée
-- Installation des bibliothèques essentielles
-- Configuration environnement (.env)
+Exécutez cette commande dans votre terminal :
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/hard-tech/creat-vite-app/main/script.sh)
+```
 
-## Prérequis
-
-- Node.js
-- npm ou yarn
-- Bash shell
-
-## Installation
+## Installation Alternative
 
 1. Téléchargez le script
 2. Rendez-le exécutable :
@@ -26,13 +18,15 @@ Un script Bash automatisé pour créer et configurer rapidement des projets Reac
 chmod +x script.sh
 ```
 
+## Prérequis
+
+- Node.js
+- npm ou yarn
+- Bash shell
+
 ## Utilisation
 
-1. Exécutez le script :
-```bash
-./script.sh
-```
-
+1. Exécutez le script via la commande d'installation rapide ou directement
 2. Suivez les étapes interactives :
 - Entrez le nom du projet
 - Choisissez TypeScript ou JavaScript
